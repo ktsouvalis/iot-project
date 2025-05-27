@@ -4,7 +4,7 @@ import random
 import json
 
 client = mqtt.Client()
-client.connect("localhost", 1883, 60)
+client.connect("192.168.1.9", 1883, 60)
 
 device_id = "device-001"
 temperature = round(random.uniform(10.0, 30.0), 2)
@@ -25,7 +25,7 @@ while True:
     }
     humidity = round(random.uniform(humidity-2, humidity+2), 2)
     temperature = round(random.uniform(temperature-1, temperature+1), 2)
-    
+
     client.publish("my_status", json.dumps(temp_payload))
     client.publish("my_status", json.dumps(hum_payload))
 
