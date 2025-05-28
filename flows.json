@@ -1,18 +1,18 @@
 [
     {
-        "id": "37da6985a18b7aed",
+        "id": "eb34e085f4536299",
         "type": "tab",
-        "label": "Flow 2",
+        "label": "Flow 3",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "a67e2e236acf501c",
+        "id": "e890c49b44900cc3",
         "type": "mqtt in",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "name": "",
-        "topic": "my_status",
+        "topic": "home_status",
         "qos": "0",
         "datatype": "auto-detect",
         "broker": "8c5033a848038bc1",
@@ -20,19 +20,19 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 180,
-        "y": 280,
+        "x": 190,
+        "y": 320,
         "wires": [
             [
-                "5eaaf85e9bca6d76",
-                "80120158cf522ab2"
+                "44853c16d7fb3351",
+                "54c8d1fe7c5fe925"
             ]
         ]
     },
     {
-        "id": "80120158cf522ab2",
+        "id": "54c8d1fe7c5fe925",
         "type": "switch",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "name": "checkType",
         "property": "payload.type",
         "propertyType": "msg",
@@ -46,31 +46,40 @@
                 "t": "eq",
                 "v": "humidity",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ack",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 2,
+        "outputs": 3,
         "x": 670,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
-                "13e9825f9cc08d99",
-                "aec6743603121a61",
-                "abb7c1f3a504dfb3",
-                "9b658d2f3554023a"
+                "a2fe577447bac74e",
+                "a414df5bba4bdbdb",
+                "3b7fbf71d1cd3e12",
+                "2874a473e1e4a303"
             ],
             [
-                "171cfd66aa69a877",
-                "aa32c61ed3ed1a53",
-                "e778eb6b9348500f"
+                "1b4a954ac714fa05",
+                "16878df79098c302",
+                "b17fdf47538c3e5d"
+            ],
+            [
+                "44ace9f0e44eea92",
+                "d19678ba9fdadb96"
             ]
         ]
     },
     {
-        "id": "13e9825f9cc08d99",
+        "id": "a2fe577447bac74e",
         "type": "ui_gauge",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "name": "tempGauge",
         "group": "56bc8d15b2e3f8d1",
         "order": 0,
@@ -78,7 +87,7 @@
         "height": 0,
         "gtype": "gage",
         "title": "",
-        "label": "oC",
+        "label": "{{msg.payload.unit}}",
         "format": "{{msg.payload.value}}",
         "min": "10",
         "max": "40",
@@ -92,21 +101,21 @@
         "diff": false,
         "className": "",
         "x": 830,
-        "y": 40,
+        "y": 80,
         "wires": []
     },
     {
-        "id": "8401c2f72ebe94bf",
+        "id": "588db53e3cace23b",
         "type": "ui_chart",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "name": "tempChart",
         "group": "56bc8d15b2e3f8d1",
         "order": 1,
         "width": 0,
         "height": 0,
-        "label": "",
+        "label": "{{msg.payload.unit}}",
         "chartType": "line",
-        "legend": "false",
+        "legend": "true",
         "xformat": "HH:mm:ss",
         "interpolate": "linear",
         "nodata": "",
@@ -134,15 +143,15 @@
         "useDifferentColor": false,
         "className": "",
         "x": 1030,
-        "y": 100,
+        "y": 140,
         "wires": [
             []
         ]
     },
     {
-        "id": "171cfd66aa69a877",
+        "id": "1b4a954ac714fa05",
         "type": "ui_gauge",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "name": "humGauge",
         "group": "b4288a5384c73a15",
         "order": 2,
@@ -150,7 +159,7 @@
         "height": 0,
         "gtype": "gage",
         "title": "",
-        "label": "%",
+        "label": "{{msg.payload.unit}}",
         "format": "{{msg.payload.value}}",
         "min": 0,
         "max": "100",
@@ -164,13 +173,13 @@
         "diff": false,
         "className": "",
         "x": 830,
-        "y": 500,
+        "y": 540,
         "wires": []
     },
     {
-        "id": "7f4a3a4dacda43fb",
+        "id": "b24e6131c88bca43",
         "type": "ui_chart",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "name": "humChart",
         "group": "b4288a5384c73a15",
         "order": 3,
@@ -206,16 +215,16 @@
         "useDifferentColor": false,
         "className": "",
         "x": 1000,
-        "y": 440,
+        "y": 480,
         "wires": [
             []
         ]
     },
     {
-        "id": "5eaaf85e9bca6d76",
+        "id": "44853c16d7fb3351",
         "type": "debug",
-        "z": "37da6985a18b7aed",
-        "name": "debug 2",
+        "z": "eb34e085f4536299",
+        "name": "debug 7",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -224,14 +233,14 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 180,
-        "y": 340,
+        "y": 380,
         "wires": []
     },
     {
-        "id": "aec6743603121a61",
+        "id": "a414df5bba4bdbdb",
         "type": "debug",
-        "z": "37da6985a18b7aed",
-        "name": "debug 3",
+        "z": "eb34e085f4536299",
+        "name": "debug 8",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -241,14 +250,14 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 620,
-        "y": 240,
+        "y": 280,
         "wires": []
     },
     {
-        "id": "aa32c61ed3ed1a53",
+        "id": "16878df79098c302",
         "type": "debug",
-        "z": "37da6985a18b7aed",
-        "name": "debug 4",
+        "z": "eb34e085f4536299",
+        "name": "debug 9",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -258,53 +267,13 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 620,
-        "y": 320,
+        "y": 360,
         "wires": []
     },
     {
-        "id": "abb7c1f3a504dfb3",
-        "type": "function",
-        "z": "37da6985a18b7aed",
-        "name": "setTempValue",
-        "func": "msg.payload = msg.payload.value;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 860,
-        "y": 100,
-        "wires": [
-            [
-                "8401c2f72ebe94bf"
-            ]
-        ]
-    },
-    {
-        "id": "e778eb6b9348500f",
-        "type": "function",
-        "z": "37da6985a18b7aed",
-        "name": "setHumValue",
-        "func": "msg.payload = msg.payload.value\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 850,
-        "y": 440,
-        "wires": [
-            [
-                "7f4a3a4dacda43fb"
-            ]
-        ]
-    },
-    {
-        "id": "070660bd6374c250",
+        "id": "95c3a805832ddb33",
         "type": "mqtt out",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "name": "",
         "topic": "gpio/heat",
         "qos": "",
@@ -316,15 +285,15 @@
         "expiry": "",
         "broker": "8c5033a848038bc1",
         "x": 1140,
-        "y": 260,
+        "y": 300,
         "wires": []
     },
     {
-        "id": "9b658d2f3554023a",
+        "id": "3b7fbf71d1cd3e12",
         "type": "function",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "name": "getDesiredTemp",
-        "func": "let desired = flow.get(\"desiredTemp\");\nlet current = msg.payload.value;\nmsg.payload = current < desired ? \"HEAT_ON\" : \"COOL_ON\";\nreturn msg;",
+        "func": "let desired = flow.get(\"desiredTemp\") || 20;\nlet current = msg.payload.value;\nmsg.payload.state = current < desired ? \"HEAT_ON\" : \"COOL_ON\";\nmsg.payload.desiredtemp=desired;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -332,20 +301,19 @@
         "finalize": "",
         "libs": [],
         "x": 880,
-        "y": 260,
+        "y": 300,
         "wires": [
             [
-                "070660bd6374c250",
-                "dfd1624ffafefe85",
-                "d3c87f9390445947"
+                "95c3a805832ddb33",
+                "5f16ca71b55618ec"
             ]
         ]
     },
     {
-        "id": "dfd1624ffafefe85",
+        "id": "5f16ca71b55618ec",
         "type": "debug",
-        "z": "37da6985a18b7aed",
-        "name": "debug 5",
+        "z": "eb34e085f4536299",
+        "name": "debug 10",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -354,15 +322,15 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 900,
-        "y": 320,
+        "y": 360,
         "wires": []
     },
     {
-        "id": "1ea432381c600ebb",
+        "id": "3c6dc451b4090f8e",
         "type": "ui_slider",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "name": "desiredTempSlider",
-        "label": "slider",
+        "label": "Thermostat",
         "tooltip": "",
         "group": "56bc8d15b2e3f8d1",
         "order": 4,
@@ -377,20 +345,20 @@
         "step": 1,
         "className": "",
         "x": 250,
-        "y": 540,
+        "y": 580,
         "wires": [
             [
-                "3569965ab6273f73",
-                "4a6ced2e4d7848e3"
+                "b2fe7eaa2e052552",
+                "f0a0430ef2e67f59"
             ]
         ]
     },
     {
-        "id": "3569965ab6273f73",
+        "id": "b2fe7eaa2e052552",
         "type": "function",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "name": "setDesiredTemp",
-        "func": "flow.set(\"desiredTemp\", msg.payload);\nreturn msg;",
+        "func": "flow.set(\"desiredTemp\", msg.payload || 20);\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -398,16 +366,16 @@
         "finalize": "",
         "libs": [],
         "x": 440,
-        "y": 540,
+        "y": 580,
         "wires": [
             []
         ]
     },
     {
-        "id": "4a6ced2e4d7848e3",
+        "id": "f0a0430ef2e67f59",
         "type": "debug",
-        "z": "37da6985a18b7aed",
-        "name": "debug 6",
+        "z": "eb34e085f4536299",
+        "name": "debug 11",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -417,28 +385,105 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 420,
-        "y": 600,
+        "y": 640,
         "wires": []
     },
     {
-        "id": "d3c87f9390445947",
+        "id": "b17fdf47538c3e5d",
+        "type": "function",
+        "z": "eb34e085f4536299",
+        "name": "setHumValue",
+        "func": "msg.topic = msg.payload.type + \" (\" + msg.payload.unit + \")\";\nmsg.payload = msg.payload.value\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 480,
+        "wires": [
+            [
+                "b24e6131c88bca43"
+            ]
+        ]
+    },
+    {
+        "id": "2874a473e1e4a303",
+        "type": "function",
+        "z": "eb34e085f4536299",
+        "name": "setTempValue",
+        "func": "msg.topic = msg.payload.type + \" (\" + msg.payload.unit + \")\";\nmsg.payload = msg.payload.value;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 140,
+        "wires": [
+            [
+                "588db53e3cace23b"
+            ]
+        ]
+    },
+    {
+        "id": "16a9bedb92a35fbc",
         "type": "ui_text",
-        "z": "37da6985a18b7aed",
+        "z": "eb34e085f4536299",
         "group": "56bc8d15b2e3f8d1",
         "order": 5,
         "width": 0,
         "height": 0,
-        "name": "",
-        "label": "State",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
+        "name": "realState",
+        "label": "Real State",
+        "format": "{{msg.payload.value}}",
+        "layout": "col-center",
         "className": "",
         "style": false,
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1030,
-        "y": 200,
+        "x": 1000,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "44ace9f0e44eea92",
+        "type": "function",
+        "z": "eb34e085f4536299",
+        "name": "getAcknowledge",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 640,
+        "wires": [
+            [
+                "16a9bedb92a35fbc"
+            ]
+        ]
+    },
+    {
+        "id": "d19678ba9fdadb96",
+        "type": "debug",
+        "z": "eb34e085f4536299",
+        "name": "debug 12",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 400,
         "wires": []
     },
     {
