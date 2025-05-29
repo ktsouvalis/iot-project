@@ -61,7 +61,7 @@ listener 1883
 allow_anonymous true
 ```
 
-📄 Δημιουργούμε επίσης αρχείο `.env` στο root directory του project:
+📄 Δημιουργούμε επίσης αρχείο `.env` (ή μετονομάζουμε το .env.example)στο root directory του project:
 
 ```env
 BROKER_IP=<ip_του_broker>
