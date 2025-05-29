@@ -1,21 +1,23 @@
 services:
+  # ΜQTT Broker 
   mosquitto:
-    image: eclipse-mosquitto
+    image: eclipse-mosquitto # Official Mosquitto Broker Image
     container_name: mqtt-broker
     ports:
-      - "1883:1883"
-      - "9001:9001"
+      - "1883:1883" # MQTT default port
+      - "9001:9001" # WebSocket port
     volumes:
-      - ./mosquitto/config:/mosquitto/config
-      - ./mosquitto/data:/mosquitto/data
-      - ./mosquitto/log:/mosquitto/log
+      - ./mosquitto/config:/mosquitto/config  # Configuration files
+      - ./mosquitto/data:/mosquitto/data # Persistent data storage
+      - ./mosquitto/log:/mosquitto/log # Log files
 
+  # Node-RED for visual programming
   nodered:
-    image: nodered/node-red
+    image: nodered/node-red # Official Node-RED Image
     container_name: node-red
     ports:
-      - "1880:1880"
+      - "1880:1880" # Node-RED default port
     depends_on:
-      - mosquitto
+      - mosquitto # Ensure Mosquitto starts first
     volumes:
-      - ./nodered-data:/data
+      - ./nodered-data:/data # Persistent Node-RED data storage
