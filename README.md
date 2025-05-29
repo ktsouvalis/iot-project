@@ -121,7 +121,7 @@ docker-compose up -d
 * `.env`
 
 ```
-BROKER_IP=localhost
+BROKER_IP=<container_host_ip>
 BROKER_PORT=1883
 ```
 
@@ -177,9 +177,9 @@ python3 iot-sensor.py
 ```
 ![Script sending data](images/script_sends_data.png)
 
-2. Άνοιγμα Node-RED Flows: [http://localhost:1880](http://localhost:1880)
+2. Άνοιγμα Node-RED Flows: [http://<container_host_ip>:1880](http://localhost:1880)
 
-3. Άνοιγμα Node-RED Dashboard: [http://localhost:1880/ui](http://localhost:1880/ui)
+3. Άνοιγμα Node-RED Dashboard: [http://<container_host_ip>:1880/ui](http://localhost:1880/ui)
 
 ---
 
