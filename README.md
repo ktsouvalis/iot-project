@@ -108,7 +108,7 @@ docker-compose up -d
 
 
 📷 **Screenshot: Επιβεβαίωση running containers στο Docker Desktop**
-![Containers Running](images/docker_desktop_containers_running.png)
+![Containers Running](images/docker_desktop_contaIners_running.png)
 
 ---
 
@@ -145,19 +145,19 @@ pip install paho-mqtt python-dotenv
 * Επιτρέπει στον χρήστη να ρυθμίζει θερμοκρασία μέσω slider
 
 * Αποστέλλει εντολή COOL\_ON στη συσκευή
-![Temperature Tab Cooling](images\temp_tab_cool.png)
+![Temperature Tab Cooling](images/temp_tab_cool.png)
 
 **Ή**
 
 * Αποστέλλει εντολή HEAT\_ON στη συσκευή
-![Temperature Tab Cooling](images\temp_tab_heat.png)
+![Temperature Tab Heating](images/temp_tab_heat.png)
 
 * Δείχνει τις πληροφορίες του "αισθητήρα" υγρασίας
-![Humidity Tab](images\humidity_tab.png)
+![Humidity Tab](images/humidity_tab.png)
 
 * Το αρχείο `flows.json` βρίσκεται στον φάκελο του έργου και μπορεί να εισαχθεί στο Node-RED από το Μενού -> Import.
-![Import Flow: Step 1](images\import_flows1.png)
-![Import Flow: Step 2](images\import_flows2.png)
+![Import Flow: Step 1](images/import_flows1.png)
+![Import Flow: Step 2](images/import_flows2.png)
 
 ---
 
