@@ -110,11 +110,21 @@ def main():
     temperature = round(random.uniform(15.0, 30.0), 0)
     humidity = round(random.uniform(20.0, 60.0), 1)
 
-    while True:
-        publish_sensor_data(client, temperature, humidity)
-        temperature = generate_temperature(temperature)
-        humidity = generate_humidity(humidity)
-        time.sleep(5)
+    try:
+        while True:
+            try:
+                publish_sensor_data(client, temperature, humidity)
+                temperature = generate_temperature(temperature)
+                humidity = generate_humidity(humidity)
+                time.sleep(5)
+            except Exception as e:
+                print(f"[ERROR] Failed to publish sensor data: {e}")
+    except KeyboardInterrupt:
+        print("\n[INFO] Keyboard interruption detected. Stopping sensor data publishing...")
+    finally:
+        client.loop_stop()
+        client.disconnect()
+        print("[INFO] Disconnected from MQTT broker. Program terminated.")
 
 if __name__ == "__main__":
     main()
