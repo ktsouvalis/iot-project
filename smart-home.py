@@ -29,10 +29,11 @@ def on_message(client, userdata, msg):
     try:
         command_data = json.loads(msg.payload.decode())
     except json.JSONDecodeError:
-        print("Invalid command format")
+        print("[SUBSCRIBE][ERROR] Received invalid command format on topic '{}'.".format(topic))
         return
 
     if topic == MQTT_TOPIC_SUBSCRIBE:
+        print(f"[SUBSCRIBE][INFO] Received command on topic '{topic}': {command_data}")
         handle_gpio_command(client, command_data)
 
 def handle_gpio_command(client, command_data):
@@ -41,11 +42,11 @@ def handle_gpio_command(client, command_data):
     desired_temp = command_data.get("desiredtemp", None)
 
     if state == "HEAT_ON":
-        print("[GPIO] Heating ON (simulated HIGH)")
+        print("[SUBSCRIBE][ACTION] Activating heating system (simulated HIGH state).")
     elif state == "COOL_ON":
-        print("[GPIO] Cooling ON (simulated LOW)")
+        print("[SUBSCRIBE][ACTION] Activating cooling system (simulated LOW state).")
     else:
-        print("[GPIO] Unknown state")
+        print(f"[SUBSCRIBE][WARNING] Received unknown state command: '{state}'.")
 
     ack_payload = {
         "device_id": DEVICE_ID,
@@ -53,6 +54,7 @@ def handle_gpio_command(client, command_data):
         "value": f"{state} for {desired_temp}°C"
     }
     client.publish(MQTT_TOPIC_PUBLISH, json.dumps(ack_payload))
+    print(f"[PUBLISH][ACK] Sent acknowledgment: {ack_payload}")
 
 # ----------------------------
 # Sensor Data Generation
@@ -83,8 +85,9 @@ def publish_sensor_data(client, temperature, humidity):
     }
 
     client.publish(MQTT_TOPIC_PUBLISH, json.dumps(temp_payload))
+    print(f"[PUBLISH][DATA] Published temperature data: {temp_payload}")
     client.publish(MQTT_TOPIC_PUBLISH, json.dumps(hum_payload))
-    print("Sent:", temp_payload, hum_payload)
+    print(f"[PUBLISH][DATA] Published humidity data: {hum_payload}")
 
 # ----------------------------
 # Main Execution
@@ -96,9 +99,10 @@ def main():
     while True:
         try:
             client.connect(BROKER_IP, BROKER_PORT, 60)
+            print(f"[INFO] Successfully connected to MQTT broker at {BROKER_IP}:{BROKER_PORT}.")
             break
         except Exception as e:
-            print(f"Waiting for MQTT broker: {e}")
+            print(f"[ERROR] Unable to connect to MQTT broker ({BROKER_IP}:{BROKER_PORT}): {e}. Retrying...")
 
     client.subscribe(MQTT_TOPIC_SUBSCRIBE)
     client.loop_start()
