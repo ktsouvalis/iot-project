@@ -238,15 +238,15 @@
         "id": "3b7fbf71d1cd3e12",
         "type": "function",
         "z": "eb34e085f4536299",
-        "name": "getDesiredTemp",
-        "func": "let desired = flow.get(\"desiredTemp\") || 20;\nlet current = msg.payload.value;\nmsg.payload.state = current < desired ? \"HEAT_ON\" : \"COOL_ON\";\nmsg.payload.desiredtemp=desired;\nreturn msg;",
+        "name": "getGlobalsForPublishing",
+        "func": "let operationSwitch =  flow.get(\"switchState\") || false;\nmsg.payload.switchState = operationSwitch ? \"ON\" : \"OFF\";\nif(operationSwitch){\n    let desired = flow.get(\"desiredTemp\") || 20;\n    let current = msg.payload.value;\n    msg.payload.state = current < desired ? \"HEAT_ON\" : \"COOL_ON\";\n    msg.payload.desiredtemp=desired;\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 880,
+        "x": 910,
         "y": 300,
         "wires": [
             [
@@ -359,6 +359,58 @@
         "x": 820,
         "y": 560,
         "wires": []
+    },
+    {
+        "id": "0d31997044dd4b58",
+        "type": "ui_switch",
+        "z": "eb34e085f4536299",
+        "name": "operationSwitch",
+        "label": "ON/OFF",
+        "tooltip": "",
+        "group": "56bc8d15b2e3f8d1",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 240,
+        "y": 500,
+        "wires": [
+            [
+                "0d8c92a50a9791a4"
+            ]
+        ]
+    },
+    {
+        "id": "0d8c92a50a9791a4",
+        "type": "function",
+        "z": "eb34e085f4536299",
+        "name": "setSwitchState",
+        "func": "flow.set(\"switchState\", msg.payload || false);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 500,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "8c5033a848038bc1",

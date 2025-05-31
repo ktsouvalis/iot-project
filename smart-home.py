@@ -40,19 +40,26 @@ def handle_gpio_command(client, command_data):
     """Handles 'gpio/heat' commands and sends back an acknowledgment."""
     state = command_data.get("state", "UNKNOWN")
     desired_temp = command_data.get("desiredtemp", None)
-
-    if state == "HEAT_ON":
-        print("[SUBSCRIBE][ACTION] Activating heating system (simulated HIGH state).")
-    elif state == "COOL_ON":
-        print("[SUBSCRIBE][ACTION] Activating cooling system (simulated LOW state).")
+    switch_state = command_data.get("switchState", None)
+    if switch_state == "OFF":      
+        ack_payload = {
+            "device_id": DEVICE_ID,
+            "type": "ack",
+            "value": switch_state
+        }  
     else:
-        print(f"[SUBSCRIBE][WARNING] Received unknown state command: '{state}'.")
+        if state == "HEAT_ON":
+            print("[SUBSCRIBE][ACTION] Activating heating system (simulated HIGH state).")
+        elif state == "COOL_ON":
+            print("[SUBSCRIBE][ACTION] Activating cooling system (simulated LOW state).")
+        else:
+            print(f"[SUBSCRIBE][WARNING] Received unknown state command: '{state}'.")
 
-    ack_payload = {
-        "device_id": DEVICE_ID,
-        "type": "ack",
-        "value": f"{state} for {desired_temp}°C"
-    }
+        ack_payload = {
+            "device_id": DEVICE_ID,
+            "type": "ack",
+            "value": f"{state} for {desired_temp}°C"
+        }
     client.publish(MQTT_TOPIC_PUBLISH, json.dumps(ack_payload))
     print(f"[PUBLISH][ACK] Sent acknowledgment: {ack_payload}")
 
