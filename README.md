@@ -152,6 +152,11 @@ pip install paho-mqtt python-dotenv
 * Αποστέλλει εντολή HEAT\_ON στη συσκευή
 ![Temperature Tab Heating](images/temp_tab_heat.png)
 
+**Ή**
+
+* Θέτει τη λειτουργία της συσκευής σε OFF
+![System OFF](images/temp_tab_off.png)
+
 * Δείχνει τις πληροφορίες του "αισθητήρα" υγρασίας
 ![Humidity Tab](images/humidity_tab.png)
 
